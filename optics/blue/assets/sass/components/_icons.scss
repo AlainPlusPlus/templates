@@ -1,0 +1,138 @@
+///
+/// Optics by Pixelarity
+/// pixelarity.com | hello@pixelarity.com
+/// License: pixelarity.com/license
+///
+
+/* Icons */
+
+	ul.icons {
+		cursor: default;
+		list-style: none;
+		padding-left: 0;
+
+		> li {
+			display: inline-block;
+			padding: 0 1em 0 0;
+
+			&:last-child {
+				padding-right: 0;
+			}
+
+			.icon {
+				&:before {
+					font-size: 2em;
+					line-height: inherit;
+				}
+			}
+		}
+
+		&.major {
+			@include vendor('display', 'flex');
+			@include vendor('justify-content', 'space-between');
+			margin-bottom: (_size(element-margin) * 2);
+
+			> li {
+				padding: 0;
+
+				&:first-child:before {
+					content: '';
+					display: block;
+					height: 2px;
+					left: 0;
+					position: absolute;
+					margin-top: 3.75em;
+					width: 100%;
+				}
+
+				> .icon {
+					border-radius: 100%;
+					border-style: solid;
+					border-width: (_size(border-width) * 2);
+					display: block;
+					height: 100%;
+					text-align: center;
+					width: 4.25em;
+					height: 4.25em;
+					line-height: 4em;
+					font-size: 1.75em;
+
+					&:before {
+						position: relative;
+					}
+				}
+
+				&.special {
+					border-width: 0;
+				}
+			}
+
+			@include breakpoint('<=small') {
+				li {
+					&:first-child:before {
+						margin-top: 2.5em;
+					}
+
+					> .icon {
+						font-size: 1.25em;
+					}
+				}
+			}
+
+			@include breakpoint('<=xsmall') {
+				li {
+					&:first-child:before {
+						margin-top: 2em;
+					}
+
+					> .icon {
+						font-size: 1em;
+					}
+				}
+			}
+		}
+	}
+
+	@mixin color-icons($p: null) {
+		ul.icons {
+			&.major {
+				> li {
+					&:first-child:before {
+						background-color: _palette($p, border);
+					}
+
+					> .icon {
+						background-color: _palette($p, bg);
+						border-color: _palette($p, border);
+						color: _palette($p, border2);
+
+						&.alt:before {
+							color: _palette($p, bg);
+							text-shadow: 1px 0px 0px _palette($p, border2),
+										-1px 0px 0px _palette($p, border2),
+										0px 1px 0px _palette($p, border2),
+										0px -1px 0px _palette($p, border2);
+						}
+					}
+
+					&.special {
+						> .icon {
+							background-color: _palette($p, highlight);
+							border-color: transparent;
+							color: _palette($p, bg);
+
+							&.alt:before {
+								color: _palette($p, highlight);
+								text-shadow: 1px 0px 0px _palette($p, bg),
+											-1px 0px 0px _palette($p, bg),
+											0px 1px 0px _palette($p, bg),
+											0px -1px 0px _palette($p, bg);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@include color-icons;

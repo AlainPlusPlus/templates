@@ -1,0 +1,34 @@
+///
+/// Optics by Pixelarity
+/// pixelarity.com | hello@pixelarity.com
+/// License: pixelarity.com/license
+///
+
+/* Checklist */
+
+	ul.checklist {
+		list-style: none;
+		padding-left: 0;
+
+		li {
+			padding-left: 0;
+			@include icon(false, solid);
+
+			&:before {
+				content: '\f00c';
+				margin-right: 0.75em;
+			}
+		}
+	}
+
+	@mixin color-checklist($p: null) {
+		ul.checklist {
+			li {
+				&:before {
+					color: _palette($p, fg);
+				}
+			}
+		}
+	}
+
+	@include color-checklist;
