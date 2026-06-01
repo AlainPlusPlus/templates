@@ -1,1 +1,1 @@
-([Projecto GDL](https://alainvargas.com/templates/editorial)
+[Proyecto GDL](https://alainvargas.com/templates/editorial)
