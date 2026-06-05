@@ -1,0 +1,52 @@
+///
+/// Optics by Pixelarity
+/// pixelarity.com | hello@pixelarity.com
+/// License: pixelarity.com/license
+///
+
+/* Labeled Icons */
+
+	ul.labeled-icons {
+		@include vendor('display', 'flex');
+		@include vendor('justify-content', 'center');
+		list-style: none;
+		padding-left: 0;
+		text-align: center;
+
+		> li {
+			border-left-style: solid;
+			border-left-width: _size(border-width);
+			padding: 0 _size(element-margin);
+
+			&:first-child {
+				border-left-width: 0;
+			}
+		}
+
+		.icon:before {
+			display: block
+		}
+
+		@include breakpoint('<=xsmall') {
+			@include vendor('flex-wrap', 'wrap');
+
+			> li {
+				border-left-width: 0;
+				margin-bottom: (_size(element-margin) * 0.5)
+			}
+		}
+	}
+
+	@mixin color-labeled-icons($p: null) {
+		ul.labeled-icons {
+			> li {
+				border-left-color: _palette($p, border);
+
+				> .icon:before {
+					color: _palette($p, highlight);
+				}
+			}
+		}
+	}
+
+	@include color-labeled-icons;
