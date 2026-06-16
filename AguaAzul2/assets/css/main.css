@@ -2111,6 +2111,12 @@ input, select, textarea {
 		background-size: 128px 128px, 100% 100%, auto;
 	}
 
+	#social-wrapper {
+		position: relative;
+		text-align: center;
+		padding: 0em 0 1em 0;
+	}
+
 	#promo-wrapper {
 		position: relative;
 		background-image: url("images/overlay.png"), url("../../images/promo.jpg");
