@@ -1,2 +1,2 @@
-- [Proyecto GDL](https://alainvargas.com/templates/AguaAzul)
+- [Proyecto GDLV1](https://alainvargas.com/templates/AguaAzul)
 - [Proyecto GDL V2](https://alainvargas.com/templates/AguaAzul2)
