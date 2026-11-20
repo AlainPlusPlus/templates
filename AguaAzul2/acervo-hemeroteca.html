@@ -98,7 +98,12 @@
 							<h2>Periódico del 30 de diciembre de 1917</h2>
 							<p>Archivos PDF conservados en Internet Archive. Selecciona un nombre para abrir o descargar el documento.</p>
 						</header>
+						<form role="search" onsubmit="return false;">
+							<label for="query">Buscar documentos</label>
+							<input type="search" id="query" name="query" placeholder="Buscar por nombre de archivo" autocomplete="off" />
+						</form>
 						<p id="pdf-status" role="status" aria-live="polite">Cargando documentos…</p>
+						<p id="no-results" role="status" aria-live="polite" hidden>No hay documentos que coincidan con la búsqueda.</p>
 						<ul id="pdf-list" class="divided"></ul>
 					</div>
 				</div>
@@ -134,6 +139,25 @@
 					var identifier = '30-diciembre-1917-anecdotico-depositos-de-cal-causa-molestia-a-los-que-usan-tran';
 					var status = document.getElementById('pdf-status');
 					var list = document.getElementById('pdf-list');
+					var searchInput = document.getElementById('query');
+					var noResults = document.getElementById('no-results');
+					var loaded = false;
+
+					function filterDocuments() {
+						var searchTerm = searchInput.value.toLocaleLowerCase().trim();
+						var visibleCount = 0;
+
+						Array.prototype.forEach.call(list.children, function (item) {
+							var link = item.querySelector('a');
+							var matches = link.textContent.toLocaleLowerCase().includes(searchTerm);
+							item.hidden = !matches;
+							if (matches) visibleCount++;
+						});
+
+						noResults.hidden = !loaded || searchTerm === '' || visibleCount !== 0;
+					}
+
+					searchInput.addEventListener('input', filterDocuments);
 
 					fetch('https://archive.org/metadata/' + identifier)
 						.then(function (response) {
@@ -152,7 +176,9 @@
 							});
 
 							if (!pdfs.length) {
+								loaded = true;
 								status.textContent = 'No se encontraron archivos PDF en este registro.';
+								filterDocuments();
 								return;
 							}
 
@@ -167,7 +193,9 @@
 								list.appendChild(item);
 							});
 
+							loaded = true;
 							status.textContent = pdfs.length + (pdfs.length === 1 ? ' archivo PDF' : ' archivos PDF');
+							filterDocuments();
 						})
 						.catch(function () {
 							status.textContent = 'No se pudo cargar la lista. Puedes consultar los archivos directamente en Internet Archive.';
